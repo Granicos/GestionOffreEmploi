@@ -1,17 +1,31 @@
 import { Link } from "react-router";
+import { useAuth } from "../hooks/useAuth";
 
 function Navbar() {
+  const { user, logout } = useAuth();
   return (
     <nav className="navbar bg-light shadow-sm text-center">
       <div className="container text-center">
         <img src="../public/favicon.svg" alt="Logo" />
-        <Link to="/" className="nav-link">
-          Accueil
-        </Link>
-        <button className="btn btn-outline-primary">INSCRIPTION</button>
-        <button className="btn btn-outline-secondary">
-          CONNEXION / DECONNEXION
-        </button>
+        {user && (
+          <Link to="/" className="nav-link">
+            Accueil
+          </Link>
+        )}
+
+        {!user && (
+          <button className="btn btn-outline-primary">INSCRIPTION</button>
+        )}
+
+        {user ? (
+          <button className="btn btn-outline-secondary" onClick={logout}>
+            Déconnexion
+          </button>
+        ) : (
+          <Link to="/login" className="btn btn-outline-secondary">
+            CONNEXION
+          </Link>
+        )}
       </div>
     </nav>
   );
