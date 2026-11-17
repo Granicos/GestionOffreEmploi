@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import { getCategories } from "../services/jobService";
 
-export default function NavBarFiltrage({ selectedDomaine, onDomaineChange }) {
+export default function NavBarFiltrage({
+  selectedDomaine,
+  onDomaineChange,
+  searchTerm,
+  onSearchTermChange,
+}) {
   const [categories, setCategories] = useState([]);
   const [error, setError] = useState("");
 
@@ -13,6 +18,19 @@ export default function NavBarFiltrage({ selectedDomaine, onDomaineChange }) {
 
   return (
     <aside className="col-12 col-md-3 col-lg-2 mb-4">
+      <div className="mb-4 text-start">
+        <label htmlFor="job-search" className="form-label">
+          Rechercher par titre ou mot-clé
+        </label>
+        <input
+          id="job-search"
+          type="search"
+          className="form-control"
+          placeholder="Ex. développeur, React, Python"
+          value={searchTerm}
+          onChange={(event) => onSearchTermChange(event.target.value)}
+        />
+      </div>
       <nav aria-label="Filtrer les offres par domaine">
         <h2 className="h5 mb-3">Filtrer par domaine</h2>
         {error && <p className="text-danger">{error}</p>}
