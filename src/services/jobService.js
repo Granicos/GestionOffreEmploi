@@ -4,7 +4,7 @@ const BASE_URL = "http://localhost:5000";
 const API_URL = `${BASE_URL}/jobs`;
 
 /**
- * Récupère les offres avec filtres optionnels (domaine, recherche textuelle, pagination)
+ * Récupère les offres d'emploi (supporte pagination, filtre par domaine et recherche)
  */
 export const getJobs = async (params = {}) => {
     try {
@@ -18,13 +18,14 @@ export const getJobs = async (params = {}) => {
         const queryString = query.toString();
         const url = queryString ? `${API_URL}?${queryString}` : API_URL;
 
-        const response = await fetch(url);
+        const response = await fetch(url, {
+            method: "GET",
+        });
 
         if (!response.ok) {
             throw new Error("Erreur HTTP: " + response.status);
         }
 
-        // Récupération du total pour la pagination
         const totalCount = parseInt(response.headers.get("X-Total-Count") || "0", 10);
         const data = await response.json();
 
@@ -39,11 +40,13 @@ export const getJobs = async (params = {}) => {
 };
 
 /**
- * Récupère le détail d'une offre par son ID
+ * Récupère le détail d'une offre via son ID
  */
 export const getJobById = async (id) => {
     try {
-        const response = await fetch(`${API_URL}/${id}`);
+        const response = await fetch(`${API_URL}/${id}`, {
+            method: "GET",
+        });
 
         if (!response.ok) {
             throw new Error("Offre d'emploi introuvable");
@@ -121,11 +124,13 @@ export const deleteJob = async (id) => {
 };
 
 /**
- * Récupère les catégories d'emploi pour la barre de navigation verticale
+ * Récupère les catégories d'emploi pour la navigation latérale
  */
 export const getCategories = async () => {
     try {
-        const response = await fetch(`${BASE_URL}/categories`);
+        const response = await fetch(`${BASE_URL}/categories`, {
+            method: "GET",
+        });
 
         if (!response.ok) {
             throw new Error("Erreur lors du chargement des catégories");
