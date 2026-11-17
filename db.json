@@ -1,0 +1,230 @@
+{
+    "categories": [
+        {
+            "id": "dev",
+            "nom": "Développement"
+        },
+        {
+            "id": "cyber",
+            "nom": "Cybersécurité"
+        },
+        {
+            "id": "reseau",
+            "nom": "Réseaux & Télécoms"
+        },
+        {
+            "id": "data",
+            "nom": "Data & IA"
+        },
+        {
+            "id": "cloud",
+            "nom": "Cloud & DevOps"
+        }
+    ],
+    "users": [
+        {
+            "id": 1,
+            "email": "admin@jobboard.fr",
+            "nom": "Administrateur",
+            "role": "admin"
+        },
+        {
+            "id": 2,
+            "email": "user@jobboard.fr",
+            "nom": "Candidat Test",
+            "role": "user"
+        }
+    ],
+    "jobs": [
+        {
+            "id": 1,
+            "titre": "Développeur Full Stack React / Node.js",
+            "entreprise": "TechSolutions",
+            "domaine": "Développement",
+            "localisation": "Bordeaux (Hybride)",
+            "typeContrat": "CDI",
+            "salaire": "42k€ - 48k€",
+            "description": "Nous recherchons un développeur Full Stack autonome pour concevoir et faire évoluer nos applications métiers sur un socle React et Node.js.",
+            "competences": [
+                "React",
+                "Node.js",
+                "Express",
+                "PostgreSQL",
+                "Git"
+            ],
+            "datePublication": "2026-11-10",
+            "disponible": true
+        },
+        {
+            "id": 2,
+            "titre": "Analyste SOC / Cybersécurité Junior",
+            "entreprise": "CyberShield SAS",
+            "domaine": "Cybersécurité",
+            "localisation": "Paris (Présentiel)",
+            "typeContrat": "CDI",
+            "salaire": "38k€ - 44k€",
+            "description": "Au sein de notre centre de sécurité opérationnelle, vous serez chargé de la détection des incidents de sécurité, de l'analyse des logs SIEM et de la réponse aux alertes.",
+            "competences": [
+                "SIEM",
+                "Splunk",
+                "Wireshark",
+                "Linux",
+                "Gestion des incidents"
+            ],
+            "datePublication": "2026-11-12",
+            "disponible": true
+        },
+        {
+            "id": 3,
+            "titre": "Administrateur Systèmes et Réseaux",
+            "entreprise": "InfraConnect",
+            "domaine": "Réseaux & Télécoms",
+            "localisation": "Toulouse (Hybride)",
+            "typeContrat": "CDI",
+            "salaire": "35k€ - 40k€",
+            "description": "Responsable du maintien en conditions opérationnelles de notre infrastructure réseau (Cisco, VPN, VLAN) et de l'administration système Windows Server / Debian.",
+            "competences": [
+                "Cisco",
+                "VLAN",
+                "VPN",
+                "Linux Debian",
+                "Windows Server"
+            ],
+            "datePublication": "2026-11-05",
+            "disponible": false
+        },
+        {
+            "id": 4,
+            "titre": "Ingénieur DevOps / Cloud AWS",
+            "entreprise": "CloudFlow",
+            "domaine": "Cloud & DevOps",
+            "localisation": "Remote (Télétravail total)",
+            "typeContrat": "CDI",
+            "salaire": "50k€ - 60k€",
+            "description": "Accompagnez la migration de nos microservices vers AWS en industrialisant les pipelines CI/CD via Docker, Kubernetes et Terraform.",
+            "competences": [
+                "AWS",
+                "Docker",
+                "Kubernetes",
+                "Terraform",
+                "GitLab CI"
+            ],
+            "datePublication": "2026-11-14",
+            "disponible": true
+        },
+        {
+            "id": 5,
+            "titre": "Data Analyst / BI",
+            "entreprise": "DataCorp Insights",
+            "domaine": "Data & IA",
+            "localisation": "Bordeaux (Hybride)",
+            "typeContrat": "CDD (12 mois)",
+            "salaire": "36k€ - 40k€",
+            "description": "Collecte, modélisation et création de dashboards Power BI pour aider les équipes marketing et finances dans leurs décisions stratégiques.",
+            "competences": [
+                "SQL",
+                "Power BI",
+                "Python",
+                "ETL",
+                "Excel"
+            ],
+            "datePublication": "2026-11-08",
+            "disponible": true
+        },
+        {
+            "id": 6,
+            "titre": "Développeur Front-End React & TypeScript",
+            "entreprise": "NovaDigital",
+            "domaine": "Développement",
+            "localisation": "Nantes (Hybride)",
+            "typeContrat": "CDI",
+            "salaire": "40k€ - 46k€",
+            "description": "Intégration d'interfaces modernes et réactives sous React 19 et Vite en étroite collaboration avec l'équipe design UI/UX.",
+            "competences": [
+                "React",
+                "TypeScript",
+                "Tailwind CSS",
+                "Vite",
+                "REST API"
+            ],
+            "datePublication": "2026-11-15",
+            "disponible": true
+        },
+        {
+            "id": 7,
+            "titre": "Consultant Pentest / Audit Sécurité",
+            "entreprise": "SecurIT Group",
+            "domaine": "Cybersécurité",
+            "localisation": "Lyon (Hybride)",
+            "typeContrat": "CDI",
+            "salaire": "45k€ - 52k€",
+            "description": "Réalisation de tests d'intrusion web, réseau et applicatifs, identification des vulnérabilités et rédaction de rapports d'audit détaillés.",
+            "competences": [
+                "Burp Suite",
+                "Metasploit",
+                "OWASP",
+                "Python",
+                "Kali Linux"
+            ],
+            "datePublication": "2026-11-03",
+            "disponible": true
+        },
+        {
+            "id": 8,
+            "titre": "Technicien Réseaux & Support N2",
+            "entreprise": "TelecomNet",
+            "domaine": "Réseaux & Télécoms",
+            "localisation": "Lille (Sur site)",
+            "typeContrat": "CDI",
+            "salaire": "28k€ - 33k€",
+            "description": "Déploiement et brassage des baies informatiques, configuration des switchs/routeurs et assistance technique de niveau 2 auprès des collaborateurs.",
+            "competences": [
+                "Switching",
+                "Routage",
+                "Ticketing",
+                "Support N2",
+                "TCP/IP"
+            ],
+            "datePublication": "2026-11-01",
+            "disponible": true
+        },
+        {
+            "id": 9,
+            "titre": "Ingénieur Machine Learning",
+            "entreprise": "Apexx AI",
+            "domaine": "Data & IA",
+            "localisation": "Paris (Hybride)",
+            "typeContrat": "CDI",
+            "salaire": "55k€ - 65k€",
+            "description": "Conception, entraînement et mise en production de modèles de NLP et de vision par ordinateur pour des solutions SaaS à fort trafic.",
+            "competences": [
+                "Python",
+                "PyTorch",
+                "Hugging Face",
+                "MLflow",
+                "Docker"
+            ],
+            "datePublication": "2026-11-13",
+            "disponible": true
+        },
+        {
+            "id": 10,
+            "titre": "Développeur Backend Java / Spring Boot",
+            "entreprise": "FinSoft France",
+            "domaine": "Développement",
+            "localisation": "Strasbourg (Hybride)",
+            "typeContrat": "CDI",
+            "salaire": "44k€ - 50k€",
+            "description": "Développement et maintenance d'architectures microservices pour des applications bancaires transactionnelles à forte charge.",
+            "competences": [
+                "Java",
+                "Spring Boot",
+                "PostgreSQL",
+                "Kafka",
+                "JUnit"
+            ],
+            "datePublication": "2026-11-09",
+            "disponible": true
+        }
+    ]
+}

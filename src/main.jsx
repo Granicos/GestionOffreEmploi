@@ -1,17 +1,18 @@
-import { StrictMode } from "react";
+import React from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.jsx";
-import { AuthProvider } from "./context/AuthContext.jsx";
 import { BrowserRouter } from "react-router";
+import "bootstrap/dist/css/bootstrap.min.css";
+import App from "./App.jsx";
+import NavBarHorizon from "./components/NavBarHorizon.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
+  <React.StrictMode>
     <BrowserRouter>
       <AuthProvider>
+        <NavBarHorizon />
         <App />
       </AuthProvider>
     </BrowserRouter>
-    <App />
-  </StrictMode>,
+  </React.StrictMode>,
 );
