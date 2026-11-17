@@ -1,19 +1,21 @@
 import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 
 function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const { login } = useAuth();
+
   function handleSubmit(e) {
     e.preventDefault();
-    if (username === "jaouad" && password === "azerty") {
+    if (login(username, password)) {
       alert("Connexion résussie !");
     } else {
       alert("Identifiants incorrects !");
     }
   }
   return (
-    //formulaire de connection
     <div className="container mt-5">
       <h2>Connexion</h2>
       <form onSubmit={handleSubmit}>
