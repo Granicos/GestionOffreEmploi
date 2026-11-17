@@ -37,26 +37,6 @@
   ],
   "jobs": [
     {
-      "id": "1",
-      "titre": "Développeur Full Stack React / Node.js",
-      "entreprise": "TechSolutions",
-      "domaine": "Développement",
-      "localisation": "Bordeaux (Hybride)",
-      "typeContrat": "CDI",
-      "salaire": "42k€ - 48k€",
-      "description": "Nous recherchons un développeur Full Stack autonome pour concevoir et faire évoluer nos applications métiers sur un socle React et Node.js.",
-      "competences": [
-        "React",
-        "Node.js",
-        "Express",
-        "PostgreSQL",
-        "Git",
-        "Assembleur"
-      ],
-      "datePublication": "2026-11-10",
-      "disponible": true
-    },
-    {
       "id": "2",
       "titre": "Analyste SOC / Cybersécurité Junior",
       "entreprise": "CyberShield SAS",
