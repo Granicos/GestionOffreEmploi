@@ -6,7 +6,7 @@ function Navbar() {
   return (
     <nav className="navbar bg-light shadow-sm text-center">
       <div className="container text-center">
-        <img src="../public/favicon.svg" alt="Logo" />
+        <img src="../favicon.svg" alt="Logo" />
         {user && (
           <Link to="/" className="nav-link">
             Accueil
