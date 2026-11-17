@@ -1,10 +1,10 @@
 import { Link } from "react-router";
 
-function Navbar() {
+export default function Navbar() {
   return (
     <nav className="navbar bg-light shadow-sm text-center">
       <div className="container text-center">
-        <img src="../public/favicon.svg" alt="Logo" />
+        <img src="../favicon.svg" alt="Logo" />
         <Link to="/" className="nav-link">
           Accueil
         </Link>
@@ -16,4 +16,3 @@ function Navbar() {
     </nav>
   );
 }
-export default Navbar;
