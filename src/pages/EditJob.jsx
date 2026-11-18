@@ -7,13 +7,47 @@ import { deleteJob, getJobById, updateJob } from "../services/jobService";
 export default function EditJob() {
   const { id } = useParams();
   const navigate = useNavigate();
-
   const [job, setJob] = useState(null);
+  const [jobs, setJobs] = useState([]);
   const [loadingJob, setLoadingJob] = useState(true);
   const [fetchError, setFetchError] = useState("");
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [jobToDelete, setJobToDelete] = useState(null);
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteError, setDeleteError] = useState("");
+  const [deleteSuccess, setDeleteSuccess] = useState("");
+
+  const handleRequestDelete = (job) => {
+    setDeleteError("");
+    setDeleteSuccess("");
+    setJobToDelete(job);
+  };
+
+  const handleCancelDelete = useCallback(() => {
+    if (isDeleting) return;
+    setDeleteError("");
+    setJobToDelete(null);
+  }, [isDeleting]);
+
+  const handleConfirmDelete = async () => {
+    if (!jobToDelete) return;
+
+    try {
+      setIsDeleting(true);
+      setDeleteError("");
+      await deleteJob(jobToDelete.id);
+      setJobs((prevJobs) =>
+        prevJobs.filter((item) => String(item.id) !== String(jobToDelete.id)),
+      );
+      setDeleteSuccess(`L'offre "${jobToDelete.titre}" a été supprimée.`);
+      setJobToDelete(null);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      setDeleteError("Impossible de supprimer cette offre d'emploi.");
+    } finally {
+      setIsDeleting(false);
+    }
+  };
 
   useEffect(() => {
     let isCancelled = false;
@@ -47,26 +81,6 @@ export default function EditJob() {
 
   const handleUpdateJob = async (updatedFields) => {
     await updateJob(id, updatedFields);
-  };
-
-  const handleCancelDelete = useCallback(() => {
-    if (isDeleting) return;
-    setDeleteError("");
-    setShowDeleteModal(false);
-  }, [isDeleting]);
-
-  const handleConfirmDelete = async () => {
-    try {
-      setIsDeleting(true);
-      setDeleteError("");
-      await deleteJob(id);
-      navigate("/");
-    } catch (error) {
-      console.error(error);
-      setDeleteError("Impossible de supprimer cette offre d'emploi.");
-    } finally {
-      setIsDeleting(false);
-    }
   };
 
   if (loadingJob) {
@@ -111,10 +125,7 @@ export default function EditJob() {
           <button
             type="button"
             className="btn btn-outline-danger"
-            onClick={() => {
-              setDeleteError("");
-              setShowDeleteModal(true);
-            }}
+            onClick={() => handleRequestDelete(job)}
           >
             Supprimer cette offre
           </button>
@@ -122,7 +133,7 @@ export default function EditJob() {
       </div>
 
       <ConfirmDeleteModal
-        job={showDeleteModal ? job : null}
+        job={jobToDelete}
         isDeleting={isDeleting}
         errorMessage={deleteError}
         onCancel={handleCancelDelete}
