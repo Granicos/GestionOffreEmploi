@@ -7,11 +7,9 @@ function Navbar() {
     <nav className="navbar bg-light shadow-sm text-center">
       <div className="container text-center">
         <img src="../favicon.svg" alt="Logo" />
-        {user && (
-          <Link to="/" className="nav-link">
-            Accueil
-          </Link>
-        )}
+        <Link to="/" className="nav-link">
+          Accueil
+        </Link>
 
         {!user && (
           <button className="btn btn-outline-primary">INSCRIPTION</button>
