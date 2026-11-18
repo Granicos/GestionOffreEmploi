@@ -5,12 +5,14 @@ function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const { login } = useAuth();
+  const { handleLogin } = useAuth();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    if (login(username, password)) {
-      alert("Connexion résussie !");
+
+    const succesConnexion = await handleLogin(username, password);
+    if (succesConnexion) {
+      alert("Connexion réussie !");
     } else {
       alert("Identifiants incorrects !");
     }
