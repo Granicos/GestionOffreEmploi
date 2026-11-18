@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router";
 import OffresPage from "./pages/OffresPage";
 import AddJob from "./pages/Addjob";
 import EditJob from "./pages/EditJob";
+import OffresDetailsPage from "./pages/OffresDetailsPage";
 
 export default function App() {
   return (
