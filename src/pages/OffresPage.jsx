@@ -1,18 +1,13 @@
-import { useCallback, useEffect, useState } from "react";
-import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
+import { useEffect, useState } from "react";
 import JobCard from "../components/JobCard";
 import NavBarFiltrage from "../components/NavBarFiltrage";
-import { deleteJob, getJobs } from "../services/jobService";
+import { getJobs } from "../services/jobService";
 import "../styles/theme.css";
 
 export default function OffresPage() {
   const [jobs, setJobs] = useState([]);
   const [domaine, setDomaine] = useState("");
   const [loadError, setLoadError] = useState("");
-  const [jobToDelete, setJobToDelete] = useState(null);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [deleteError, setDeleteError] = useState("");
-  const [deleteSuccess, setDeleteSuccess] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
   const searchWords = searchTerm.trim().toLocaleLowerCase().split(/\s+/);
@@ -50,38 +45,6 @@ export default function OffresPage() {
     };
   }, [domaine]);
 
-  const handleRequestDelete = (job) => {
-    setDeleteError("");
-    setDeleteSuccess("");
-    setJobToDelete(job);
-  };
-
-  const handleCancelDelete = useCallback(() => {
-    if (isDeleting) return;
-    setDeleteError("");
-    setJobToDelete(null);
-  }, [isDeleting]);
-
-  const handleConfirmDelete = async () => {
-    if (!jobToDelete) return;
-
-    try {
-      setIsDeleting(true);
-      setDeleteError("");
-      await deleteJob(jobToDelete.id);
-      setJobs((prevJobs) =>
-        prevJobs.filter((item) => String(item.id) !== String(jobToDelete.id)),
-      );
-      setDeleteSuccess(`L'offre "${jobToDelete.titre}" a été supprimée.`);
-      setJobToDelete(null);
-    } catch (error) {
-      console.error(error);
-      setDeleteError("Impossible de supprimer cette offre d'emploi.");
-    } finally {
-      setIsDeleting(false);
-    }
-  };
-
   return (
     <div className="container-xxl py-4">
       <header className="hero text-center rounded-4 p-4 p-md-5 mb-4">
@@ -108,22 +71,6 @@ export default function OffresPage() {
           </div>
         )}
 
-        {deleteSuccess && (
-          <div
-            className="alert alert-success alert-dismissible fade show mx-auto mt-3"
-            style={{ maxWidth: "600px" }}
-            role="alert"
-          >
-            {deleteSuccess}
-            <button
-              type="button"
-              className="btn-close"
-              aria-label="Fermer"
-              onClick={() => setDeleteSuccess("")}
-            />
-          </div>
-        )}
-
         <div className="row">
           <NavBarFiltrage
             selectedDomaine={domaine}
@@ -142,12 +89,7 @@ export default function OffresPage() {
             {filteredJobs.length > 0 ? (
               <div className="row g-4">
                 {filteredJobs.map((job, index) => (
-                  <JobCard
-                    key={job.id}
-                    job={job}
-                    index={index}
-                    onDelete={handleRequestDelete}
-                  />
+                  <JobCard key={job.id} job={job} index={index} />
                 ))}
               </div>
             ) : (
@@ -157,14 +99,6 @@ export default function OffresPage() {
             )}
           </main>
         </div>
-
-        <ConfirmDeleteModal
-          job={jobToDelete}
-          isDeleting={isDeleting}
-          errorMessage={deleteError}
-          onCancel={handleCancelDelete}
-          onConfirm={handleConfirmDelete}
-        />
       </div>
     </div>
   );

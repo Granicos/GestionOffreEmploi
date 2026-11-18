@@ -1,12 +1,54 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router";
-import { getJobById } from "../services/jobService";
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate, Link, useParams } from "react-router";
+import { deleteJob, getJobById } from "../services/jobService";
 import "../styles/theme.css";
+import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
+import { useAuth } from "../hooks/useAuth";
 
 export default function OffresDetailsPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [job, setJob] = useState(null);
   const [error, setError] = useState("");
+  const [jobs, setJobs] = useState([]);
+  const { user } = useAuth();
+  const [jobToDelete, setJobToDelete] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState("");
+  const [deleteSuccess, setDeleteSuccess] = useState("");
+
+  const handleRequestDelete = (job) => {
+    setDeleteError("");
+    setDeleteSuccess("");
+    setJobToDelete(job);
+  };
+
+  const handleCancelDelete = useCallback(() => {
+    if (isDeleting) return;
+    setDeleteError("");
+    setJobToDelete(null);
+  }, [isDeleting]);
+
+  const handleConfirmDelete = async () => {
+    if (!jobToDelete) return;
+
+    try {
+      setIsDeleting(true);
+      setDeleteError("");
+      await deleteJob(jobToDelete.id);
+      setJobs((prevJobs) =>
+        prevJobs.filter((item) => String(item.id) !== String(jobToDelete.id)),
+      );
+      setDeleteSuccess(`L'offre "${jobToDelete.titre}" a été supprimée.`);
+      setJobToDelete(null);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      setDeleteError("Impossible de supprimer cette offre d'emploi.");
+    } finally {
+      setIsDeleting(false);
+    }
+  };
 
   useEffect(() => {
     let active = true;
@@ -136,14 +178,31 @@ export default function OffresDetailsPage() {
       </section>
 
       {/* Actions */}
-      <div className="d-flex flex-wrap justify-content-center gap-3">
-        <button className="btn btn-grad rounded-pill px-4 py-2">
-          ✏️ Modifier l'offre
-        </button>
-        <button className="btn btn-outline-danger rounded-pill px-4 py-2">
-          🗑️ Supprimer l'offre
-        </button>
-      </div>
+      {user && (
+        <div className="d-flex flex-wrap justify-content-center gap-3">
+          <Link
+            to={`/edit-job/${job.id}`}
+            className="btn btn-outline-danger rounded-pill px-4 py-2"
+          >
+            ✏️ Modifier l'offre
+          </Link>
+          <button
+            type="button"
+            className="btn btn-outline-danger rounded-pill px-4 py-2"
+            onClick={() => handleRequestDelete(job)}
+          >
+            🗑️ Supprimer l'offre
+          </button>
+
+          <ConfirmDeleteModal
+            job={jobToDelete}
+            isDeleting={isDeleting}
+            errorMessage={deleteError}
+            onCancel={handleCancelDelete}
+            onConfirm={handleConfirmDelete}
+          />
+        </div>
+      )}
     </main>
   );
 }
