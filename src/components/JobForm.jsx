@@ -74,6 +74,22 @@ export default function JobForm({
     e.preventDefault();
     setErrorMessage("");
     setStatusMessage("");
+    const jobPayload = {
+      titre: formData.titre.trim(),
+      entreprise: formData.entreprise.trim(),
+      domaine: formData.domaine,
+      localisation: formData.localisation.trim(),
+      typeContrat: formData.typeContrat,
+      salaire: formData.salaire.trim() || "Non communiqué",
+      description: formData.description.trim(),
+      competences: formData.competences
+        ? formData.competences
+            .split(",")
+            .map((c) => c.trim())
+            .filter(Boolean)
+        : [],
+      disponible: Boolean(formData.disponible),
+    };
 
     if (
       !formData.titre.trim() ||

@@ -396,6 +396,38 @@ body {
   font-size: 1.5rem;
   flex-shrink: 0;
 }
+/* ============ Pagination ============ */
+.pagination-theme .page-link {
+  color: var(--ink);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  background: var(--surface);
+  font-weight: 600;
+  min-width: 2.5rem;
+  height: 2.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.2s,
+    background 0.2s,
+    color 0.2s,
+    box-shadow 0.2s;
+}
+.pagination-theme .page-link:hover:not(:disabled) {
+  background: #ede9fe;
+  color: var(--c1);
+  transform: translateY(-2px);
+}
+.pagination-theme .page-item.active .page-link {
+  background: var(--grad);
+  border-color: transparent;
+  color: #fff;
+  box-shadow: 0 6px 16px rgba(124, 58, 237, 0.35);
+}
+.pagination-theme .page-item.disabled .page-link {
+  opacity: 0.5;
+  background: #f5f3ff;
+}
 
 @media (prefers-reduced-motion: reduce) {
   * {

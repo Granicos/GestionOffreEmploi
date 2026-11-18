@@ -1,34 +1,69 @@
 import { useEffect, useState } from "react";
 import JobCard from "../components/JobCard";
 import NavBarFiltrage from "../components/NavBarFiltrage";
+import Pagination from "../components/Pagination";
 import { getJobs } from "../services/jobService";
 import "../styles/theme.css";
+
+const ITEMS_PER_PAGE = 6;
 
 export default function OffresPage() {
   const [jobs, setJobs] = useState([]);
   const [domaine, setDomaine] = useState("");
   const [loadError, setLoadError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalPages, setTotalPages] = useState(1);
 
+  const hasSearch = searchTerm.trim().length > 0;
   const searchWords = searchTerm.trim().toLocaleLowerCase().split(/\s+/);
-  const filteredJobs = jobs.filter((job) => {
-    if (!searchTerm.trim()) return true;
+  const filteredJobs = hasSearch
+    ? jobs.filter((job) => {
+        const searchableText = [job.titre, ...(job.competences ?? [])]
+          .join(" ")
+          .toLocaleLowerCase();
 
-    const searchableText = [job.titre, ...(job.competences ?? [])]
-      .join(" ")
-      .toLocaleLowerCase();
+        return searchWords.every((word) => searchableText.includes(word));
+      })
+    : jobs;
 
-    return searchWords.every((word) => searchableText.includes(word));
-  });
+  const effectiveTotalPages = hasSearch
+    ? Math.max(1, Math.ceil(filteredJobs.length / ITEMS_PER_PAGE))
+    : totalPages;
+  const safePage = Math.min(currentPage, effectiveTotalPages);
+  const displayedJobs = hasSearch
+    ? filteredJobs.slice(
+        (safePage - 1) * ITEMS_PER_PAGE,
+        safePage * ITEMS_PER_PAGE,
+      )
+    : jobs;
+  const displayedCount = hasSearch ? filteredJobs.length : totalItems;
+
+  const handleDomaineChange = (nextDomaine) => {
+    setDomaine(nextDomaine);
+    setCurrentPage(1);
+  };
+
+  const handleSearchTermChange = (nextSearch) => {
+    setSearchTerm(nextSearch);
+    setCurrentPage(1);
+  };
 
   useEffect(() => {
     let isCancelled = false;
 
-    getJobs({ domaine })
-      .then(({ data }) => {
+    const params = hasSearch
+      ? { domaine }
+      : { page: currentPage, limit: ITEMS_PER_PAGE, domaine };
+
+    getJobs(params)
+      .then(({ data, totalCount, totalPages: apiTotalPages }) => {
         if (!isCancelled) {
           setLoadError("");
           setJobs(data);
+          setTotalItems(totalCount);
+          setTotalPages(apiTotalPages);
         }
       })
       .catch((error) => {
@@ -43,7 +78,7 @@ export default function OffresPage() {
     return () => {
       isCancelled = true;
     };
-  }, [domaine]);
+  }, [domaine, currentPage, hasSearch]);
 
   return (
     <div className="container-xxl py-4">
@@ -52,14 +87,14 @@ export default function OffresPage() {
         <span className="blob blob-2" />
         <span className="blob blob-3" />
         <h1 className="display-5 fw-bold">
-          Trouvez l'offre qui vous correspond ✨
+          Trouvez l&apos;offre qui vous correspond ✨
         </h1>
         <p className="lead mb-0">
-          Recherchez parmi nos offres d'emploi et filtrez par domaine.
+          Recherchez parmi nos offres d&apos;emploi et filtrez par domaine.
         </p>
       </header>
       <div className="container-fluid mt-5 px-4 text-center">
-        <h1>Bienvenue sur la Recherche d'Offres d'Emploi</h1>
+        <h1>Bienvenue sur la Recherche d&apos;Offres d&apos;Emploi</h1>
 
         {loadError && (
           <div
@@ -74,24 +109,31 @@ export default function OffresPage() {
         <div className="row">
           <NavBarFiltrage
             selectedDomaine={domaine}
-            onDomaineChange={setDomaine}
+            onDomaineChange={handleDomaineChange}
             searchTerm={searchTerm}
-            onSearchTermChange={setSearchTerm}
+            onSearchTermChange={handleSearchTermChange}
           />
 
           <main className="col-12 col-md-8 col-lg-9">
             <p className="results-count text-secondary fw-medium text-start mb-3">
-              <span>{filteredJobs.length}</span> offre
-              {filteredJobs.length > 1 ? "s" : ""} trouvée
-              {filteredJobs.length > 1 ? "s" : ""}
+              <span>{displayedCount}</span> offre
+              {displayedCount > 1 ? "s" : ""} trouvée
+              {displayedCount > 1 ? "s" : ""}
             </p>
 
-            {filteredJobs.length > 0 ? (
-              <div className="row g-4">
-                {filteredJobs.map((job, index) => (
-                  <JobCard key={job.id} job={job} index={index} />
-                ))}
-              </div>
+            {displayedJobs.length > 0 ? (
+              <>
+                <div className="row g-4">
+                  {displayedJobs.map((job, index) => (
+                    <JobCard key={job.id} job={job} index={index} />
+                  ))}
+                </div>
+                <Pagination
+                  currentPage={safePage}
+                  totalPages={effectiveTotalPages}
+                  onPageChange={setCurrentPage}
+                />
+              </>
             ) : (
               <div className="empty-state bg-white rounded-4 text-secondary text-center py-5">
                 Aucune offre ne correspond à votre recherche.
