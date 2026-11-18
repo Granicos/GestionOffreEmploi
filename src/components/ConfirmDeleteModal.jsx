@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-
+import "../styles/theme.css";
 
 export default function ConfirmDeleteModal({
   job,
@@ -25,12 +25,11 @@ export default function ConfirmDeleteModal({
 
   return (
     <div
-      className="modal fade show d-block"
+      className="modal modal-overlay fade show d-block"
       tabIndex="-1"
       role="dialog"
       aria-modal="true"
       aria-labelledby="confirm-delete-title"
-      style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
       onClick={(e) => {
         if (e.target === e.currentTarget && !isDeleting) {
           onCancel();
@@ -38,35 +37,44 @@ export default function ConfirmDeleteModal({
       }}
     >
       <div className="modal-dialog modal-dialog-centered">
-        <div className="modal-content text-start">
-          <div className="modal-header">
-            <h5 id="confirm-delete-title" className="modal-title">
-              Confirmer la suppression
-            </h5>
-            <button
-              type="button"
-              className="btn-close"
-              aria-label="Fermer"
-              onClick={onCancel}
-              disabled={isDeleting}
-            />
-          </div>
-          <div className="modal-body">
+        <div className="modal-content modal-pop border-0 rounded-4 shadow-lg overflow-hidden text-start">
+          <div className="modal-body p-4">
+            <div className="d-flex align-items-start gap-3 mb-3">
+              <div className="icon-circle bg-danger-subtle">🗑️</div>
+              <div className="flex-grow-1">
+                <h5 id="confirm-delete-title" className="fw-bold mb-1">
+                  Confirmer la suppression
+                </h5>
+                <p className="text-secondary small mb-0">
+                  Cette action est définitive.
+                </p>
+              </div>
+              <button
+                type="button"
+                className="btn-close"
+                aria-label="Fermer"
+                onClick={onCancel}
+                disabled={isDeleting}
+              />
+            </div>
+
             {errorMessage && (
-              <div className="alert alert-danger" role="alert">
+              <div className="alert alert-danger rounded-4" role="alert">
                 {errorMessage}
               </div>
             )}
+
             <p className="mb-0">
               Voulez-vous vraiment supprimer l&apos;offre{" "}
               <strong>{job.titre}</strong>
               {job.entreprise ? ` (${job.entreprise})` : ""} ?
             </p>
           </div>
-          <div className="modal-footer">
+
+          <div className="modal-footer border-0 bg-body-tertiary px-4 py-3">
             <button
               type="button"
-              className="btn btn-secondary"
+              className="btn btn-light border rounded-pill px-4"
               onClick={onCancel}
               disabled={isDeleting}
             >
@@ -74,10 +82,16 @@ export default function ConfirmDeleteModal({
             </button>
             <button
               type="button"
-              className="btn btn-danger"
+              className="btn btn-danger rounded-pill px-4"
               onClick={onConfirm}
               disabled={isDeleting}
             >
+              {isDeleting && (
+                <span
+                  className="spinner-border spinner-border-sm me-2"
+                  aria-hidden="true"
+                />
+              )}
               {isDeleting ? "Suppression..." : "Supprimer"}
             </button>
           </div>
