@@ -119,11 +119,14 @@ export default function OffresPage() {
           onSearchTermChange={setSearchTerm}
         />
         <main className="col-12 col-md-9 col-lg-10">
-          </div>
           {filteredJobs.length > 0 ? (
             <div className="row">
               {filteredJobs.map((job) => (
-                <JobCard key={job.id} job={job} onDelete={handleRequestDelete} />
+                <JobCard
+                  key={job.id}
+                  job={job}
+                  onDelete={handleRequestDelete}
+                />
               ))}
             </div>
           ) : (

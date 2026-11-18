@@ -223,23 +223,6 @@
       "datePublication": "2026-11-17",
       "disponible": true,
       "id": "4Fuz82LJX6s"
-    },
-    {
-      "titre": "Développeur Java",
-      "entreprise": "ITECHNO",
-      "domaine": "Cloud & DevOps",
-      "localisation": "Amiens",
-      "typeContrat": "CDI",
-      "salaire": "40 000 € - 45 000 €",
-      "description": "Ouf",
-      "competences": [
-        "REACT",
-        "Angular",
-        "Symfony"
-      ],
-      "datePublication": "2026-11-17",
-      "disponible": true,
-      "id": "5KMDIKLVF2o"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
