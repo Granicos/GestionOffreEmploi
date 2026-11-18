@@ -15,15 +15,23 @@ export default function Navbar() {
           <span className="brand-text fs-4">JobFinder</span>
         </Link>
 
-        <Link to="/" className="nav-link fw-semibold">
-          Accueil
-        </Link>
+        {user && (
+          <Link
+            to="/add-job"
+            className="btn btn-outline-grad rounded-pill px-3"
+          >
+            Ajouter une offre
+          </Link>
+        )}
 
         <div className="d-flex gap-2">
           {!user && (
-            <button className="btn btn-outline-grad rounded-pill px-3">
+            <Link
+              to="/inscription"
+              className="btn btn-outline-grad rounded-pill px-3"
+            >
               Inscription
-            </button>
+            </Link>
           )}
 
           {user ? (

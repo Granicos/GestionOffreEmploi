@@ -1,18 +1,21 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import { useAuth } from "../hooks/useAuth";
 
 function LoginPage() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const { handleLogin } = useAuth();
 
   async function handleSubmit(e) {
     e.preventDefault();
 
-    const succesConnexion = await handleLogin(username, password);
+    const succesConnexion = await handleLogin(email, password);
     if (succesConnexion) {
       alert("Connexion réussie !");
+      navigate("/");
     } else {
       alert("Identifiants incorrects !");
     }
@@ -23,9 +26,9 @@ function LoginPage() {
       <form onSubmit={handleSubmit}>
         <input
           className="form-control mb-3"
-          placeholder="Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           className="form-control mb-3"
