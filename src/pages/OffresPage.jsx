@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import JobCard from "../components/JobCard";
 import NavBarFiltrage from "../components/NavBarFiltrage";
 import { getJobs } from "../services/jobService";
+import "../styles/theme.css";
 
 export default function OffresPage() {
   const [jobs, setJobs] = useState([]);
@@ -26,8 +27,19 @@ export default function OffresPage() {
   }, [domaine]);
 
   return (
-    <div className="container-fluid mt-5 px-4 text-center">
-      <h1>Bienvenue sur la Recherche d'Offres d'Emploi</h1>
+    <div className="container-xxl py-4">
+      <header className="hero text-center rounded-4 p-4 p-md-5 mb-4">
+        <span className="blob blob-1" />
+        <span className="blob blob-2" />
+        <span className="blob blob-3" />
+        <h1 className="display-5 fw-bold">
+          Trouvez l'offre qui vous correspond ✨
+        </h1>
+        <p className="lead mb-0">
+          Recherchez parmi nos offres d'emploi et filtrez par domaine.
+        </p>
+      </header>
+
       <div className="row">
         <NavBarFiltrage
           selectedDomaine={domaine}
@@ -35,15 +47,24 @@ export default function OffresPage() {
           searchTerm={searchTerm}
           onSearchTermChange={setSearchTerm}
         />
-        <main className="col-12 col-md-9 col-lg-10">
+
+        <main className="col-12 col-md-8 col-lg-9">
+          <p className="results-count text-secondary fw-medium text-start mb-3">
+            <span>{filteredJobs.length}</span> offre
+            {filteredJobs.length > 1 ? "s" : ""} trouvée
+            {filteredJobs.length > 1 ? "s" : ""}
+          </p>
+
           {filteredJobs.length > 0 ? (
-            <div className="row">
-              {filteredJobs.map((job) => (
-                <JobCard key={job.id} job={job} />
+            <div className="row g-4">
+              {filteredJobs.map((job, index) => (
+                <JobCard key={job.id} job={job} index={index} />
               ))}
             </div>
           ) : (
-            <p>Aucune offre ne correspond à votre recherche.</p>
+            <div className="empty-state bg-white rounded-4 text-secondary text-center py-5">
+              Aucune offre ne correspond à votre recherche.
+            </div>
           )}
         </main>
       </div>

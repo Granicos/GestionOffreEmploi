@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router";
 import { getJobById } from "../services/jobService";
+import "../styles/theme.css";
 
 export default function OffresDetailsPage() {
   const { id } = useParams();
@@ -31,10 +32,10 @@ export default function OffresDetailsPage() {
 
   if (error) {
     return (
-      <main className="container mt-5">
-        <p className="alert alert-danger">{error}</p>
-        <Link to="/" className="btn btn-outline-primary">
-          Retour aux offres
+      <main className="container-xxl py-5 text-center">
+        <p className="alert alert-danger rounded-4 shadow-sm">{error}</p>
+        <Link to="/" className="btn btn-outline-grad rounded-pill px-4">
+          ← Retour aux offres
         </Link>
       </main>
     );
@@ -42,59 +43,107 @@ export default function OffresDetailsPage() {
 
   if (!job) {
     return (
-      <main className="container mt-5">
-        <p>Chargement de l'offre...</p>
+      <main className="container-xxl py-5 text-center">
+        <div className="spinner-border text-primary mb-3" role="status" />
+        <p className="text-secondary">Chargement de l'offre...</p>
       </main>
     );
   }
 
+  const infos = [
+    { icon: "🏢", label: "Entreprise", value: job.entreprise },
+    { icon: "🗂️", label: "Domaine", value: job.domaine },
+    { icon: "📍", label: "Localisation", value: job.localisation },
+    { icon: "📄", label: "Type de contrat", value: job.typeContrat },
+    { icon: "💶", label: "Salaire", value: job.salaire },
+    { icon: "📅", label: "Publiée le", value: job.datePublication },
+  ];
+
   return (
-    <main className="container mt-5">
-      <Link to="/" className="btn btn-outline-primary mb-4">
-        Retour aux offres
+    <main className="container-xxl py-4">
+      <Link to="/" className="btn btn-outline-grad rounded-pill px-4 mb-4">
+        ← Retour aux offres
       </Link>
-      <article className="card">
-        <div className="card-body">
-          <h1 className="card-title mb-4">{job.titre}</h1>
-          <dl className="row">
-            <dt className="col-sm-3">Identifiant</dt>
-            <dd className="col-sm-9">{job.id}</dd>
 
-            <dt className="col-sm-3">Entreprise</dt>
-            <dd className="col-sm-9">{job.entreprise}</dd>
+      {/* En-tête */}
+      <header className="hero rounded-4 p-4 p-md-5 mb-4">
+        <span className="blob blob-1" />
+        <span className="blob blob-2" />
+        <span className="blob blob-3" />
+        <p className="text-uppercase fw-semibold small mb-2">
+          Offre n°{job.id}
+        </p>
+        <h1 className="display-5 fw-bold mb-3">{job.titre}</h1>
+        <span
+          className={`badge rounded-pill px-3 py-2 ${
+            job.disponible
+              ? "text-bg-success-subtle text-success-emphasis"
+              : "text-bg-danger-subtle text-danger-emphasis"
+          }`}
+        >
+          <span
+            className={job.disponible ? "dot-available" : "dot-unavailable"}
+          />
+          {job.disponible ? "Disponible" : "Non disponible"}
+        </span>
+      </header>
 
-            <dt className="col-sm-3">Domaine</dt>
-            <dd className="col-sm-9">{job.domaine}</dd>
+      {/* Informations clés */}
+      <section className="row g-3 mb-4">
+        {infos.map((info, index) => (
+          <div key={info.label} className="col-12 col-sm-6 col-lg-4">
+            <div
+              className="job-card card h-100 border-0 shadow-sm rounded-4"
+              style={{ animationDelay: `${index * 70}ms` }}
+            >
+              <div className="card-body d-flex align-items-center gap-3">
+                <div className="job-avatar fs-4 rounded-3 px-3 py-2">
+                  {info.icon}
+                </div>
+                <div className="text-start">
+                  <div className="text-secondary small">{info.label}</div>
+                  <div className="fw-bold">{info.value || "—"}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </section>
 
-            <dt className="col-sm-3">Localisation</dt>
-            <dd className="col-sm-9">{job.localisation}</dd>
+      {/* Compétences */}
+      <section className="filter-panel card shadow-sm rounded-4 p-4 mb-4 text-start">
+        <h2 className="h5 fw-bold mb-3">🛠️ Compétences</h2>
+        {job.competences?.length ? (
+          <div className="d-flex flex-wrap gap-2">
+            {job.competences.map((competence) => (
+              <span
+                key={competence}
+                className="badge rounded-pill bg-primary-subtle text-primary-emphasis fs-6 fw-semibold px-3 py-2"
+              >
+                {competence}
+              </span>
+            ))}
+          </div>
+        ) : (
+          <p className="text-secondary mb-0">Aucune compétence renseignée</p>
+        )}
+      </section>
 
-            <dt className="col-sm-3">Type de contrat</dt>
-            <dd className="col-sm-9">{job.typeContrat}</dd>
+      {/* Description */}
+      <section className="filter-panel card shadow-sm rounded-4 p-4 mb-4 text-start">
+        <h2 className="h5 fw-bold mb-3">📝 Description</h2>
+        <p className="mb-0">{job.description}</p>
+      </section>
 
-            <dt className="col-sm-3">Salaire</dt>
-            <dd className="col-sm-9">{job.salaire}</dd>
-
-            <dt className="col-sm-3">Date de publication</dt>
-            <dd className="col-sm-9">{job.datePublication}</dd>
-
-            <dt className="col-sm-3">Disponibilité</dt>
-            <dd className="col-sm-9">{job.disponible ? "Oui" : "Non"}</dd>
-
-            <dt className="col-sm-3">Compétences</dt>
-            <dd className="col-sm-9">
-              {job.competences?.length
-                ? job.competences.join(", ")
-                : "Aucune compétence renseignée"}
-            </dd>
-          </dl>
-
-          <h2 className="h5">Description</h2>
-          <p className="card-text">{job.description}</p>
-          <button className="btn btn-primary m-4">Modifier l'Offre</button>
-          <button className="btn btn-primary m-4">Supprimer l'Offre</button>
-        </div>
-      </article>
+      {/* Actions */}
+      <div className="d-flex flex-wrap justify-content-center gap-3">
+        <button className="btn btn-grad rounded-pill px-4 py-2">
+          ✏️ Modifier l'offre
+        </button>
+        <button className="btn btn-outline-danger rounded-pill px-4 py-2">
+          🗑️ Supprimer l'offre
+        </button>
+      </div>
     </main>
   );
 }
