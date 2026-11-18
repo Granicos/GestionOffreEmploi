@@ -12,6 +12,18 @@ export default function OffresPage() {
   const [isDeleting, setIsDeleting] = useState(false);
   const [deleteError, setDeleteError] = useState("");
   const [deleteSuccess, setDeleteSuccess] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const searchWords = searchTerm.trim().toLocaleLowerCase().split(/\s+/);
+  const filteredJobs = jobs.filter((job) => {
+    if (!searchTerm.trim()) return true;
+
+    const searchableText = [job.titre, ...(job.competences ?? [])]
+      .join(" ")
+      .toLocaleLowerCase();
+
+    return searchWords.every((word) => searchableText.includes(word));
+  });
 
   useEffect(() => {
     let isCancelled = false;
@@ -103,17 +115,20 @@ export default function OffresPage() {
         <NavBarFiltrage
           selectedDomaine={domaine}
           onDomaineChange={setDomaine}
+          searchTerm={searchTerm}
+          onSearchTermChange={setSearchTerm}
         />
         <main className="col-12 col-md-9 col-lg-10">
-          <div className="row">
-            {jobs.map((job) => (
-              <JobCard
-                key={job.id}
-                job={job}
-                onDelete={handleRequestDelete}
-              />
-            ))}
           </div>
+          {filteredJobs.length > 0 ? (
+            <div className="row">
+              {filteredJobs.map((job) => (
+                <JobCard key={job.id} job={job} onDelete={handleRequestDelete} />
+              ))}
+            </div>
+          ) : (
+            <p>Aucune offre ne correspond à votre recherche.</p>
+          )}
         </main>
       </div>
 

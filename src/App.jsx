@@ -9,6 +9,7 @@ export default function App() {
       <Route path="/" element={<OffresPage />} />
       <Route path="/add-job" element={<AddJob />} />
       <Route path="/edit-job/:id" element={<EditJob />} />
+      <Route path="/jobs/:id" element={<OffresDetailsPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
