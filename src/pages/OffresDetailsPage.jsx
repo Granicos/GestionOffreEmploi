@@ -182,7 +182,7 @@ export default function OffresDetailsPage() {
         <div className="d-flex flex-wrap justify-content-center gap-3">
           <Link
             to={`/edit-job/${job.id}`}
-            className="btn btn-outline-danger rounded-pill px-4 py-2"
+            className="btn btn-grad rounded-pill px-4 py-2"
           >
             ✏️ Modifier l'offre
           </Link>

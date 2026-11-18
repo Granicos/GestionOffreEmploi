@@ -15,10 +15,6 @@ export default function Navbar() {
           <span className="brand-text fs-4">JobFinder</span>
         </Link>
 
-        <Link to="/" className="nav-link fw-semibold">
-          Accueil
-        </Link>
-
         <div className="d-flex gap-2">
           {!user && (
             <button className="btn btn-outline-grad rounded-pill px-3">
