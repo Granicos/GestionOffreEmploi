@@ -11,7 +11,7 @@ export const getJobs = async (params = {}) => {
     const query = new URLSearchParams();
 
     if (params.page) query.append("_page", params.page);
-    if (params.limit) query.append("_limit", params.limit);
+    if (params.limit) query.append("_per_page", params.limit);
     if (params.domaine) query.append("domaine", params.domaine);
     if (params.q) query.append("q", params.q);
 
@@ -26,15 +26,32 @@ export const getJobs = async (params = {}) => {
       throw new Error("Erreur HTTP: " + response.status);
     }
 
-    const totalCount = parseInt(
+    const result = await response.json();
+
+    // json-server v1 renvoie { data, items, pages, ... } quand _page est utilisé
+    if (!Array.isArray(result) && Array.isArray(result?.data)) {
+      return {
+        data: result.data,
+        totalCount: result.items ?? result.data.length,
+        totalPages: result.pages ?? 1,
+      };
+    }
+
+    const headerTotal = parseInt(
       response.headers.get("X-Total-Count") || "0",
       10,
     );
-    const data = await response.json();
+    const items = Array.isArray(result) ? result : [];
+    const totalCount = headerTotal || items.length;
+    const totalPages =
+      params.limit && totalCount
+        ? Math.max(1, Math.ceil(totalCount / params.limit))
+        : 1;
 
     return {
-      data,
+      data: items,
       totalCount,
+      totalPages,
     };
   } catch (error) {
     console.error("Erreur lors de la récupération des offres:", error);

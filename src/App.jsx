@@ -2,10 +2,10 @@ import { Routes, Route, Navigate } from "react-router";
 import OffresPage from "./pages/OffresPage";
 import AddJob from "./pages/Addjob";
 import EditJob from "./pages/EditJob";
+import OffresDetailsPage from "./pages/OffresDetailsPage";
 import LoginPage from "./pages/LoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
-import OffresDetailsPage from "./pages/OffresDetailsPage";
-import InscriptionPage from "./pages/InscriptionPage";
+import InscriptionPage from "./pages/InscriptionPage"
 
 export default function App() {
   return (

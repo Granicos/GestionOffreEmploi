@@ -97,9 +97,9 @@ export default function JobForm({
                 description: formData.description.trim(),
                 competences: formData.competences
                     ? formData.competences
-                          .split(",")
-                          .map((c) => c.trim())
-                          .filter(Boolean)
+                        .split(",")
+                        .map((c) => c.trim())
+                        .filter(Boolean)
                     : [],
                 disponible: Boolean(formData.disponible),
             };
