@@ -5,6 +5,7 @@ import EditJob from "./pages/EditJob";
 import LoginPage from "./pages/LoginPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import OffresDetailsPage from "./pages/OffresDetailsPage";
+import InscriptionPage from "./pages/InscriptionPage";
 
 export default function App() {
   return (
@@ -28,6 +29,7 @@ export default function App() {
       />
       <Route path="/jobs/:id" element={<OffresDetailsPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/inscription" element={<InscriptionPage />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
