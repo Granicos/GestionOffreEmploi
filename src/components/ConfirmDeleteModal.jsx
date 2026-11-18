@@ -1,8 +1,6 @@
 import { useEffect } from "react";
 
-/**
- * Modale de confirmation avant la suppression d'une offre d'emploi.
- */
+
 export default function ConfirmDeleteModal({
   job,
   isDeleting,
