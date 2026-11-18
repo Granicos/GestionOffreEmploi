@@ -1,16 +1,43 @@
-# React + Vite
+# Gestion des offres d'emploi
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
 
-Currently, two official plugins are available:
+Application web permettant de gérer des offres d'emploi.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+L'application permet notamment de :
 
-## React Compiler
+- Consulter les offres d'emploi.
+- Ajouter une nouvelle offre.
+- Modifier une offre existante.
+- Supprimer une offre avec confirmation.
+- Gérer les erreurs et les états de chargement.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Technologies utilisées
 
-## Expanding the ESLint configuration
+- React : bibliothèque JavaScript pour construire l'interface utilisateur.
+- Vite : outil de développement et de build.
+- React Router : gestion de la navigation.
+- Bootstrap : mise en forme de l'interface.
+- JavaScript : langage de développement.
+- npm : gestionnaire de dépendances.
+- JSON-Server : outil qui permet de simuler une API REST
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Prérequis
+
+Avant de commencer, assurez-vous d'avoir installé :
+
+- Node.js.
+- npm (installé automatiquement avec Node.js).
+
+Pour vérifier les installations :
+`node -v` et `npm -v`
+
+### Installer les dépendances :
+
+`npm install`
+
+## Lancement du projet
+
+Lancement du Json-server : `npx json-server db.json --port 3000`\
+\
+Lancement du serveur de développement : `npm run dev`
