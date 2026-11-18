@@ -26,14 +26,12 @@
       "id": "1",
       "username": "admin@jobboard.fr",
       "password": "azerty",
-      "nom": "Administrateur",
-      "role": "admin"
+      "nom": "Administrateur"
     },
     {
       "id": "2",
       "email": "user@jobboard.fr",
-      "nom": "Candidat Test",
-      "role": "user"
+      "nom": "Candidat Test"
     }
   ],
   "jobs": [
@@ -46,13 +44,7 @@
       "typeContrat": "CDI",
       "salaire": "35k€ - 40k€",
       "description": "Responsable du maintien en conditions opérationnelles de notre infrastructure réseau (Cisco, VPN, VLAN) et de l'administration système Windows Server / Debian.",
-      "competences": [
-        "Cisco",
-        "VLAN",
-        "VPN",
-        "Linux Debian",
-        "Windows Server"
-      ],
+      "competences": ["Cisco", "VLAN", "VPN", "Linux Debian", "Windows Server"],
       "datePublication": "2026-11-05",
       "disponible": false
     },
@@ -65,13 +57,7 @@
       "typeContrat": "CDI",
       "salaire": "50k€ - 60k€",
       "description": "Accompagnez la migration de nos microservices vers AWS en industrialisant les pipelines CI/CD via Docker, Kubernetes et Terraform.",
-      "competences": [
-        "AWS",
-        "Docker",
-        "Kubernetes",
-        "Terraform",
-        "GitLab CI"
-      ],
+      "competences": ["AWS", "Docker", "Kubernetes", "Terraform", "GitLab CI"],
       "datePublication": "2026-11-14",
       "disponible": true
     },
@@ -84,13 +70,7 @@
       "typeContrat": "CDD (12 mois)",
       "salaire": "36k€ - 40k€",
       "description": "Collecte, modélisation et création de dashboards Power BI pour aider les équipes marketing et finances dans leurs décisions stratégiques.",
-      "competences": [
-        "SQL",
-        "Power BI",
-        "Python",
-        "ETL",
-        "Excel"
-      ],
+      "competences": ["SQL", "Power BI", "Python", "ETL", "Excel"],
       "datePublication": "2026-11-08",
       "disponible": true
     },
@@ -160,13 +140,7 @@
       "typeContrat": "CDI",
       "salaire": "55k€ - 65k€",
       "description": "Conception, entraînement et mise en production de modèles de NLP et de vision par ordinateur pour des solutions SaaS à fort trafic.",
-      "competences": [
-        "Python",
-        "PyTorch",
-        "Hugging Face",
-        "MLflow",
-        "Docker"
-      ],
+      "competences": ["Python", "PyTorch", "Hugging Face", "MLflow", "Docker"],
       "datePublication": "2026-11-13",
       "disponible": true
     },
@@ -179,13 +153,7 @@
       "typeContrat": "CDI",
       "salaire": "44k€ - 50k€",
       "description": "Développement et maintenance d'architectures microservices pour des applications bancaires transactionnelles à forte charge.",
-      "competences": [
-        "Java",
-        "Spring Boot",
-        "PostgreSQL",
-        "Kafka",
-        "JUnit"
-      ],
+      "competences": ["Java", "Spring Boot", "PostgreSQL", "Kafka", "JUnit"],
       "datePublication": "2026-11-09",
       "disponible": true
     }
