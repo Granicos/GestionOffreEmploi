@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 
-export default function JobCard({ job }) {
+export default function JobCard({ job, onDelete }) {
   return (
     <div className="col-6 col-md-2 col-lg-4 mb-4 text-center">
       <div
@@ -24,6 +24,17 @@ export default function JobCard({ job }) {
             Voir Details
           </Link>
         </div>
+        {onDelete && (
+          <div className="card-footer bg-light border-0 pb-3">
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => onDelete(job)}
+            >
+              Supprimer
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
