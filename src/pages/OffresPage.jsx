@@ -6,6 +6,7 @@ import { getJobs } from "../services/jobService";
 export default function OffresPage() {
   const [jobs, setJobs] = useState([]);
   const [domaine, setDomaine] = useState("");
+  const [loadError, setLoadError] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
   const searchWords = searchTerm.trim().toLocaleLowerCase().split(/\s+/);
@@ -20,14 +21,43 @@ export default function OffresPage() {
   });
 
   useEffect(() => {
+    let isCancelled = false;
+
     getJobs({ domaine })
-      .then(({ data }) => setJobs(data))
-      .catch((error) => console.error(error));
+      .then(({ data }) => {
+        if (!isCancelled) {
+          setLoadError("");
+          setJobs(data);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        if (!isCancelled) {
+          setLoadError(
+            "Impossible de charger les offres. Vérifiez que json-server est lancé sur le port 3000.",
+          );
+        }
+      });
+
+    return () => {
+      isCancelled = true;
+    };
   }, [domaine]);
 
   return (
     <div className="container-fluid mt-5 px-4 text-center">
       <h1>Bienvenue sur la Recherche d'Offres d'Emploi</h1>
+
+      {loadError && (
+        <div
+          className="alert alert-danger mx-auto mt-3"
+          style={{ maxWidth: "600px" }}
+          role="alert"
+        >
+          {loadError}
+        </div>
+      )}
+
       <div className="row">
         <NavBarFiltrage
           selectedDomaine={domaine}

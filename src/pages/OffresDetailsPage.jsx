@@ -1,11 +1,53 @@
-import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router";
-import { getJobById } from "../services/jobService";
+import { useCallback, useEffect, useState } from "react";
+import { useNavigate, Link, useParams } from "react-router";
+import { deleteJob, getJobById } from "../services/jobService";
+import ConfirmDeleteModal from "../components/ConfirmDeleteModal";
+import { useAuth } from "../hooks/useAuth";
 
 export default function OffresDetailsPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [job, setJob] = useState(null);
   const [error, setError] = useState("");
+  const [jobs, setJobs] = useState([]);
+  const { user } = useAuth();
+  const [jobToDelete, setJobToDelete] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState("");
+  const [deleteSuccess, setDeleteSuccess] = useState("");
+
+  const handleRequestDelete = (job) => {
+    setDeleteError("");
+    setDeleteSuccess("");
+    setJobToDelete(job);
+  };
+
+  const handleCancelDelete = useCallback(() => {
+    if (isDeleting) return;
+    setDeleteError("");
+    setJobToDelete(null);
+  }, [isDeleting]);
+
+  const handleConfirmDelete = async () => {
+    if (!jobToDelete) return;
+
+    try {
+      setIsDeleting(true);
+      setDeleteError("");
+      await deleteJob(jobToDelete.id);
+      setJobs((prevJobs) =>
+        prevJobs.filter((item) => String(item.id) !== String(jobToDelete.id)),
+      );
+      setDeleteSuccess(`L'offre "${jobToDelete.titre}" a été supprimée.`);
+      setJobToDelete(null);
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      setDeleteError("Impossible de supprimer cette offre d'emploi.");
+    } finally {
+      setIsDeleting(false);
+    }
+  };
 
   useEffect(() => {
     let active = true;
@@ -91,8 +133,28 @@ export default function OffresDetailsPage() {
 
           <h2 className="h5">Description</h2>
           <p className="card-text">{job.description}</p>
-          <button className="btn btn-primary m-4">Modifier l'Offre</button>
-          <button className="btn btn-primary m-4">Supprimer l'Offre</button>
+          {user && (
+            <div>
+              <Link to={`/edit-job/${job.id}`} className="btn btn-primary m-4">
+                Modifier l'Offre
+              </Link>
+              <button
+                type="button"
+                className="btn btn-outline-danger"
+                onClick={() => handleRequestDelete(job)}
+              >
+                Supprimer l'Offre
+              </button>
+
+              <ConfirmDeleteModal
+                job={jobToDelete}
+                isDeleting={isDeleting}
+                errorMessage={deleteError}
+                onCancel={handleCancelDelete}
+                onConfirm={handleConfirmDelete}
+              />
+            </div>
+          )}
         </div>
       </article>
     </main>
