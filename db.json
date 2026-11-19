@@ -39,12 +39,29 @@
       "password": "aaa",
       "username": "aaa"
     },
-
     {
       "id": "OBqg86ESkzo",
       "email": "fatni",
       "password": "ilyass",
       "username": "ilyass"
+    },
+    {
+      "email": "a@a.com",
+      "password": "a",
+      "username": "a",
+      "id": "SvZ2exS7TaQ"
+    },
+    {
+      "email": "a@a.com",
+      "password": "a",
+      "username": "a",
+      "id": "O0Q2WqoLpBg"
+    },
+    {
+      "email": "a@a",
+      "password": "a",
+      "username": "a",
+      "id": "7XmyKJiEU4M"
     }
   ],
   "jobs": [
@@ -57,22 +74,15 @@
       "typeContrat": "CDI",
       "salaire": "35k€ - 40k€",
       "description": "Responsable du maintien en conditions opérationnelles de notre infrastructure réseau (Cisco, VPN, VLAN) et de l'administration système Windows Server / Debian.",
-      "competences": ["Cisco", "VLAN", "VPN", "Linux Debian", "Windows Server"],
+      "competences": [
+        "Cisco",
+        "VLAN",
+        "VPN",
+        "Linux Debian",
+        "Windows Server"
+      ],
       "datePublication": "2026-11-05",
       "disponible": false
-    },
-    {
-      "id": "4",
-      "titre": "Ingénieur DevOps / Cloud AWS",
-      "entreprise": "CloudFlow",
-      "domaine": "Cloud & DevOps",
-      "localisation": "Remote (Télétravail total)",
-      "typeContrat": "CDI",
-      "salaire": "50k€ - 60k€",
-      "description": "Accompagnez la migration de nos microservices vers AWS en industrialisant les pipelines CI/CD via Docker, Kubernetes et Terraform.",
-      "competences": ["AWS", "Docker", "Kubernetes", "Terraform", "GitLab CI"],
-      "datePublication": "2026-11-14",
-      "disponible": true
     },
     {
       "id": "5",
@@ -83,7 +93,13 @@
       "typeContrat": "CDD (12 mois)",
       "salaire": "36k€ - 40k€",
       "description": "Collecte, modélisation et création de dashboards Power BI pour aider les équipes marketing et finances dans leurs décisions stratégiques.",
-      "competences": ["SQL", "Power BI", "Python", "ETL", "Excel"],
+      "competences": [
+        "SQL",
+        "Power BI",
+        "Python",
+        "ETL",
+        "Excel"
+      ],
       "datePublication": "2026-11-08",
       "disponible": true
     },
@@ -107,25 +123,6 @@
       "disponible": true
     },
     {
-      "id": "7",
-      "titre": "Consultant Pentest / Audit Sécurité",
-      "entreprise": "SecurIT Group",
-      "domaine": "Cybersécurité",
-      "localisation": "Lyon (Hybride)",
-      "typeContrat": "CDI",
-      "salaire": "45k€ - 52k€",
-      "description": "Réalisation de tests d'intrusion web, réseau et applicatifs, identification des vulnérabilités et rédaction de rapports d'audit détaillés.",
-      "competences": [
-        "Burp Suite",
-        "Metasploit",
-        "OWASP",
-        "Python",
-        "Kali Linux"
-      ],
-      "datePublication": "2026-11-03",
-      "disponible": true
-    },
-    {
       "id": "8",
       "titre": "Technicien Réseaux & Support N2",
       "entreprise": "TelecomNet",
@@ -142,32 +139,6 @@
         "TCP/IP"
       ],
       "datePublication": "2026-11-01",
-      "disponible": true
-    },
-    {
-      "id": "9",
-      "titre": "Ingénieur Machine Learning",
-      "entreprise": "Apexx AI",
-      "domaine": "Data & IA",
-      "localisation": "Paris (Hybride)",
-      "typeContrat": "CDI",
-      "salaire": "55k€ - 65k€",
-      "description": "Conception, entraînement et mise en production de modèles de NLP et de vision par ordinateur pour des solutions SaaS à fort trafic.",
-      "competences": ["Python", "PyTorch", "Hugging Face", "MLflow", "Docker"],
-      "datePublication": "2026-11-13",
-      "disponible": true
-    },
-    {
-      "id": "10",
-      "titre": "Développeur Backend Java / Spring Boott",
-      "entreprise": "FinSoft France",
-      "domaine": "Développement",
-      "localisation": "Strasbourg (Hybride)",
-      "typeContrat": "CDI",
-      "salaire": "44k€ - 50k€",
-      "description": "Développement et maintenance d'architectures microservices pour des applications bancaires transactionnelles à forte charge.",
-      "competences": ["Java", "Spring Boot", "PostgreSQL", "Kafka", "JUnit"],
-      "datePublication": "2026-11-09",
       "disponible": true
     }
   ],

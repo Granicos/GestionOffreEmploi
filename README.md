@@ -21,6 +21,7 @@ L'application permet notamment de :
 - JavaScript : langage de développement.
 - npm : gestionnaire de dépendances.
 - JSON-Server : outil qui permet de simuler une API REST
+- Vitest : outil de test automatisé
 
 ## Prérequis
 
@@ -40,4 +41,6 @@ Pour vérifier les installations :
 
 Lancement du Json-server : `npx json-server db.json --port 3000`\
 \
-Lancement du serveur de développement : `npm run dev`
+Lancement du serveur de développement : `npm run dev`\
+\
+Lancement des tests : `npx vitest run --environment jsdom `
