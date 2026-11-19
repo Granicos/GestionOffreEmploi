@@ -39,12 +39,29 @@
       "password": "aaa",
       "username": "aaa"
     },
-
     {
       "id": "OBqg86ESkzo",
       "email": "fatni",
       "password": "ilyass",
       "username": "ilyass"
+    },
+    {
+      "email": "a@a.com",
+      "password": "a",
+      "username": "a",
+      "id": "SvZ2exS7TaQ"
+    },
+    {
+      "email": "a@a.com",
+      "password": "a",
+      "username": "a",
+      "id": "O0Q2WqoLpBg"
+    },
+    {
+      "email": "a@a",
+      "password": "a",
+      "username": "a",
+      "id": "7XmyKJiEU4M"
     }
   ],
   "jobs": [
@@ -107,25 +124,6 @@
       "disponible": true
     },
     {
-      "id": "7",
-      "titre": "Consultant Pentest / Audit Sécurité",
-      "entreprise": "SecurIT Group",
-      "domaine": "Cybersécurité",
-      "localisation": "Lyon (Hybride)",
-      "typeContrat": "CDI",
-      "salaire": "45k€ - 52k€",
-      "description": "Réalisation de tests d'intrusion web, réseau et applicatifs, identification des vulnérabilités et rédaction de rapports d'audit détaillés.",
-      "competences": [
-        "Burp Suite",
-        "Metasploit",
-        "OWASP",
-        "Python",
-        "Kali Linux"
-      ],
-      "datePublication": "2026-11-03",
-      "disponible": true
-    },
-    {
       "id": "8",
       "titre": "Technicien Réseaux & Support N2",
       "entreprise": "TelecomNet",
@@ -169,6 +167,19 @@
       "competences": ["Java", "Spring Boot", "PostgreSQL", "Kafka", "JUnit"],
       "datePublication": "2026-11-09",
       "disponible": true
+    },
+    {
+      "id": "28c0",
+      "titre": "developpeur",
+      "entreprise": "ert",
+      "domaine": "Cybersécurité",
+      "localisation": "ert",
+      "typeContrat": "CDI",
+      "salaire": "345",
+      "description": "rien",
+      "competences": ["React"],
+      "disponible": true,
+      "datePublication": "2026-11-18"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
